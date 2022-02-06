@@ -7,6 +7,7 @@ import store from '@lib/redux/store'
 import { Provider as ReduxProvider } from 'react-redux'
 
 import Layout from '@components/Layout';
+import Head from "next/head";
 
 
 
@@ -29,6 +30,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <ReduxProvider store={store}>
       <ChakraProvider theme={theme}>
+        <Head>
+          <title>Minted</title>
+        </Head>
         {getLayout(<Component {...pageProps} />)}
       </ChakraProvider >
     </ReduxProvider>

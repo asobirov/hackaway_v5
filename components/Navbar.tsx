@@ -21,16 +21,19 @@ import {
     MenuList,
     MenuItem,
     MenuGroup,
+    Image,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import NextLink from 'next/link';
+import NextImage from 'next/image';
 
 import { Link } from './Link';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 import { Menu, Minus, GitHub, LinkedIn, Mail, NavArrowRight } from 'iconoir-react'
 import { useSelector } from 'react-redux';
 import { AppState } from '@lib/redux/store';
+
+import logo from '@public/logo.png';
 
 type NavItem = {
     label: string;
@@ -104,7 +107,8 @@ export default function Navbar({ heading }: { heading?: string }) {
                     position='relative'
                     zIndex={{ md: 'overlay' }}
                 >
-                    <Flex display={{ base: 'none', md: 'flex' }}>
+                    <Flex display={{ base: 'none', md: 'flex' }} align={'center'}>
+                        <Image src={'./logo.png'} alt='logo' w={'auto'} h={10} mr={8}/>
                         <DesktopNav />
                     </Flex>
 
