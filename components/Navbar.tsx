@@ -46,7 +46,7 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
     {
-        label: 'Discover',
+        label: 'Minted Music',
         href: '/discover',
         visible: true
     }
@@ -108,12 +108,9 @@ export default function Navbar({ heading }: { heading?: string }) {
                     zIndex={{ md: 'overlay' }}
                 >
                     <Flex display={{ base: 'none', md: 'flex' }} align={'center'}>
-                        <Image src={'./logo.png'} alt='logo' w={'auto'} h={10} mr={8}/>
                         <DesktopNav />
                     </Flex>
-
                     <Flex>
-
                         <ChakraMenu>
                             <Avatar
                                 as={MenuButton}
@@ -244,10 +241,11 @@ const DesktopNav = () => {
                         ) : (
                             <Link
                                 href={navItem.href ?? '#'}
-                                activeOnPage
-                                variant={'hover-bg'}
+                                // activeOnPage
+                                // variant={'hover-bg'}
                                 // fontSize='sm'
                                 fontWeight={500}
+                                fontSize='xl'
                                 h={'full'}
                             >
                                 {navItem.label}
