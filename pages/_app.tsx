@@ -1,8 +1,36 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { ChakraProvider } from "@chakra-ui/react"
+import 'focus-visible/dist/focus-visible'
+import theme from "../styles/theme"
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+import { AppPropsWithLayout } from '@lib/types';
+import store from '@lib/redux/store'
+import { Provider as ReduxProvider } from 'react-redux'
+
+import Layout from '@components/Layout';
+
+
+
+
+export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ||
+    Component.navbarTitle && (
+      (page) =>
+        <Layout
+          navbarTitle={Component.navbarTitle}
+          children={page}
+        />
+    ) || (
+      (page) =>
+        <Layout
+          children={page}
+        />
+    );
+
+  return (
+    <ReduxProvider store={store}>
+      <ChakraProvider theme={theme}>
+        {getLayout(<Component {...pageProps} />)}
+      </ChakraProvider >
+    </ReduxProvider>
+  );
 }
-
-export default MyApp

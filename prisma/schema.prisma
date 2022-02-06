@@ -1,0 +1,40 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongodb"]
+}
+
+model Track {
+  id            String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  address       String
+  title         String
+  description   String?
+  price         Float
+  duration      Int
+  genre         String?
+  trackImageUrl String?
+  trackFileUrl  String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+  artist        Artist   @relation(fields: [artistId], references: [id])
+  artistId      String   @db.ObjectId
+}
+
+model User {
+  id             String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  walletId       String  @unique
+}
+
+model Artist {
+  id       String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  walletId String  @unique
+  username String  @unique @default(uuid())
+  name     String  @default("Unnamed Artist")
+  email    String
+  avatar   String
+  tracks   Track[]
+}
