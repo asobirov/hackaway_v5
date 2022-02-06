@@ -14,7 +14,7 @@ const DiscoverPage: NextPageWithLayout = () => {
     const { walletId } = useSelector((state: AppState) => state.profile);
     const toast = useToast()
 
-    const handlePurchase = (track: any) => {
+    const handlePurchase = async (track: any) => {
         if (walletId == track.artist.walletId) {
             toast({
                 title: 'You invested in your own track! ',
@@ -27,20 +27,30 @@ const DiscoverPage: NextPageWithLayout = () => {
             return
         }
         const ethereum = window.ethereum;
-        ethereum.request({
-            method: 'eth_sendTransaction',
-            params: [
-                {
-                    from: walletId,
-                    to: track.artist.walletId,
-                    value: '0x' + (track.price * 1000000000000000000).toString(16),
-                    gasPrice: '0x08184E72A000',
-                    gas: '0x5208',
-                },
-            ],
-        })
-            .then((txHash: any) => console.log(txHash))
-            .catch((error: any) => console.error);
+        try {
+            const hash = await ethereum.request({
+                method: 'eth_sendTransaction',
+                params: [
+                    {
+                        from: walletId,
+                        to: track.artist.walletId,
+                        value: '0x' + (track.price * 1000000000000000000).toString(16),
+                        gasPrice: '0x08184E72A000',
+                        gas: '0x5208',
+                    },
+                ],
+            })
+            toast({
+                title: 'Congratulation on minting this NFT! ',
+                description: `You invested ${track.price} ETH to ${track.artist.name}`,
+                status: 'success',
+                position: 'bottom-right',
+                duration: 9000,
+                isClosable: true,
+            })
+        } catch (error) {
+            console.error(error)
+        }
     }
     return (
         <>
@@ -76,7 +86,7 @@ const DiscoverPage: NextPageWithLayout = () => {
                             spacing={4}
                         >
                             <Stack align={'center'} spacing={1}>
-                                <Heading size={'lg'} textAlign={'center'}>{track.title}</Heading>
+                                <Heading size={'lg'} textAlign={'center'} noOfLines={1}>{track.title}</Heading>
                                 {track.artist && <Link href={`/profile/${track.artist.username}`}>
                                     {track.artist.name}
                                 </Link>}

@@ -5,6 +5,7 @@ const initialState = {
   walletId: "",
   name: null,
   username: null,
+  avatar: ""
 };
 
 const profileSlice = createSlice({
@@ -12,11 +13,12 @@ const profileSlice = createSlice({
   initialState,
   reducers: {
     updateProfile(state, action: PayloadAction<any>) {
-      const { id, walletId, name, username } = action.payload;
+      const { id, walletId, name, username, avatar } = action.payload;
       state.id = id;
       state.walletId = walletId;
       state.name = name;
       state.username = username;
+      state.avatar = avatar;
     }
   },
 });

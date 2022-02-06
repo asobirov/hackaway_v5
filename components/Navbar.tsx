@@ -43,11 +43,6 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
     {
-        label: 'Home',
-        href: '/',
-        visible: true
-    },
-    {
         label: 'Discover',
         href: '/discover',
         visible: true
@@ -88,7 +83,7 @@ export default function Navbar({ heading }: { heading?: string }) {
             onToggle();
         }
     }
-    const { walletId, id, name } = useSelector((state: AppState) => state.profile);
+    const { walletId, id, name, avatar } = useSelector((state: AppState) => state.profile);
     return (
         <Flex
             position={{ base: 'relative', md: 'sticky' }}
@@ -119,6 +114,7 @@ export default function Navbar({ heading }: { heading?: string }) {
                             <Avatar
                                 as={MenuButton}
                                 name={name ?? ""}
+                                src={avatar ?? ""}
                                 _hover={{
                                     cursor: 'pointer',
                                 }}

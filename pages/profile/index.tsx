@@ -83,6 +83,7 @@ const ProfilePage = () => {
             walletId: artistD.walletId,
             name: artistD.name,
             username: artistD.username,
+            avatar: artistD.avatar,
         }));
         artist = {
             ...artistD
@@ -102,7 +103,7 @@ const ProfilePage = () => {
                 justify='space-between'
             >
                 <Stack direction={'row'} spacing={10}>
-                    <Avatar size='2xl' borderRadius={'1.5rem'} name={profileName ?? ""} src="https://bit.ly/2X3lZ9i" />
+                    <Avatar size='2xl' borderRadius={'1.5rem'} name={profileName ?? ""} src={artist?.avatar ?? ""} />
                     <Stack justify={'center'} spacing={2}>
                         <Heading size='xl'>{profileName}</Heading>
                         <Text fontSize="xl">{artist?.email}</Text>
@@ -247,7 +248,7 @@ const ProfilePage = () => {
                                     px={6}
                                     spacing={4}
                                 >
-                                    <Heading size={'lg'} textAlign={'center'}>{track.title}</Heading>
+                                    <Heading size={'lg'} textAlign={'center'} isTruncated>{track.title}</Heading>
                                     <TrackPlayerSlim
                                         url={track.trackFileUrl}
                                         borderless

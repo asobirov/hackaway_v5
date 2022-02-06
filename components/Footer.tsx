@@ -53,7 +53,7 @@ const Footer = () => {
                         w="full"
                     >
                         <Text fontSize='sm'>
-                            © asobirov
+                            © minted
                         </Text>
                         <Stack
                             direction='row'

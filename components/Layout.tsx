@@ -80,7 +80,8 @@ const Layout = ({ children, title, description, navbarTitle, coverImage = '/publ
                 id: artist?.id ?? null,
                 name: artist?.name ?? null,
                 username: artist?.username ?? null,
-                walletId: artist?.walletId ?? ""
+                walletId: artist?.walletId ?? "",
+                avatar: artist?.avatar ?? "",
             }));
         } else {
             alert('Marketplace contract not deployed to detected network.');
